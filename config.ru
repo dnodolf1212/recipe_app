@@ -6,6 +6,7 @@ end
 
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 
+use Rack::MethodOverride
 
 use RecipesController
 run ApplicationController

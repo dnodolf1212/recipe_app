@@ -2,5 +2,14 @@
 <ul>
 <% @recipes.each do |recipe| %> 
   <h3><%= recipe.title %></h3>
+  <p><%= recipe.description %></p>
+  <p><%= recipe.ingredients %></p>
+  <p><%= recipe.instructions %></p>
+  
+  <form action="/recipes/<%= recipe.id %>" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete">
+  </form>
+  <p><a href="/recipes/<%= recipe.id %>/edit">Edit This Recipe</a></p>
 <% end %>
 </ul>

@@ -19,28 +19,35 @@ class RecipesController < ApplicationController
 
   #show
   get '/recipes/:id' do 
-    @recipe = Recipe.find(params[:id])
+    set_recipe
     erb :'recipes/show'
   end 
 
   #edit
-  get 'recipes/:id/edit' do 
-    @recipe = Recipe.find(params[:id])
-    erb :edit
+  get '/recipes/:id/edit' do 
+    set_recipe
+    erb :'recipes/edit'
   end
   
-
   #update
   patch '/recipes/:id' do
-    @recipe = Recipe.find(params[:id])
-    @recipe.update(title: params[:title], description: params[:description], ingredients: params[:ingredients], instructions: params[:instructions])
-    redirect "/recipes/#{recipe.id}"
+    #binding.pry
+    params.delete(:_method)
+    set_recipe
+    @recipe.update(params)
+    redirect "/recipes/#{@recipe.id}"
   end
+  
   #delete
-  delete '/recipes/:id' do
-    @recipe = Recipe.find(params[:id])
+  delete '/recipes/:id' do 
+    set_recipe
     @recipe.destroy
     redirect '/recipes'
-end
+  end
+
+  private
+  def set_recipe
+    @recipe = current_user.recipes.find(params[:id])
+  end
 
 end
