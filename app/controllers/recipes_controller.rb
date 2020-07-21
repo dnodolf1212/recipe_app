@@ -1,8 +1,12 @@
 class RecipesController < ApplicationController
   #index
   get '/recipes' do 
-    @recipes = current_user.recipes 
-    erb :'recipes/index'  
+    if current_user
+      @recipes = current_user.recipes.all
+      erb :'recipes/index'
+    else 
+      redirect '/login'
+    end 
   end
 
   #new
