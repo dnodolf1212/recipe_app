@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
   #index
   get '/recipes' do 
-    if current_user
+    if loggen_in?
       @recipes = current_user.recipes.all
       erb :'recipes/index'
     else 
@@ -11,7 +11,11 @@ class RecipesController < ApplicationController
 
   #new
   get '/recipes/new' do 
+    if logged_in?
     erb :'recipes/new'
+    else
+      redirect '/login'
+    end 
   end
 
   #create
@@ -23,8 +27,12 @@ class RecipesController < ApplicationController
 
   #show
   get '/recipes/:id' do 
+    if logged_in?
     set_recipe
     erb :'recipes/show'
+    else
+      redirect '/login'
+    end
   end 
 
   #edit

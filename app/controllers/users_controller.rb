@@ -10,14 +10,14 @@ class UsersController < ApplicationController
     redirect '/recipes'
   end
 
-  get '/login' do 
+  get '/login' do
     erb :'users/login'
   end
 
   post '/login' do 
-    @user = User.find_by(email: params[:email])
-    if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id 
+    user = User.find_by(email: params[:email])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id 
       redirect '/recipes'
     else
       @error = 'invalid info, try again'
