@@ -4,11 +4,11 @@
   <label for="title"><h2>Edit Title:</h2></label>
     <input type="text" name="title" id="title" value="<%= @recipe.title%>">
   <label for="description"><h2>Edit Description:</h2></label>
-    <textarea name="description" id="description" value="<%= @recipe.description%>" rows="5" cols="50"></textarea>
+    <textarea name="description" id="description" value="<%= @recipe.description%>" rows="5" cols="50"><%= @recipe.description%></textarea>
   <label for="ingredients"><h2>Edit Ingredients:</h2></label>
-    <textarea name="ingredients" id="ingredients" value="<%= @recipe.ingredients%>" rows="5" cols="50"></textarea>
+    <textarea name="ingredients" id="ingredients" value="<%= @recipe.ingredients%>" rows="5" cols="50"><%= @recipe.ingredients%></textarea>
   <label for="instructions"><h2>Edit Instructions:</h2></label>
-    <textarea name="instructions" id="instructions" value="<%= @recipe.instructions%>" rows="5" cols="50"></textarea>
+    <textarea name="instructions" id="instructions" value="<%= @recipe.instructions%>" rows="5" cols="50"><%= @recipe.instructions%></textarea>
     <input type="submit" value="Update Your Recipe!">
   
 </form>

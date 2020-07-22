@@ -1,21 +1,15 @@
 class RecipesController < ApplicationController
   #index
   get '/recipes' do 
-    if loggen_in?
-      @recipes = current_user.recipes.all
-      erb :'recipes/index'
-    else 
-      redirect '/login'
-    end 
+    redirect_if_not_logged_in
+    @recipes = current_user.recipes.all
+    erb :'recipes/index'
   end
 
   #new
   get '/recipes/new' do 
-    if logged_in?
+    redirect_if_not_logged_in
     erb :'recipes/new'
-    else
-      redirect '/login'
-    end 
   end
 
   #create
@@ -27,12 +21,12 @@ class RecipesController < ApplicationController
 
   #show
   get '/recipes/:id' do 
-    if logged_in?
-    set_recipe
-    erb :'recipes/show'
-    else
-      redirect '/login'
-    end
+    redirect_if_not_logged_in
+      if set_recipe
+        erb :'recipes/show'
+      else
+       redirect '/recipes'
+      end
   end 
 
   #edit

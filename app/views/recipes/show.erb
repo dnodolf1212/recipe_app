@@ -1,5 +1,7 @@
-<p><%=  @recipe.title %></p>
-<p><%=  @recipe.description %></p>
-<p><%=  @recipe.ingredients %></p>
-<p><%=  @recipe.instructions %></p>
-<a href="/recipes">Check Out All Our Recipes</a>
+<h1><%=  @recipe.title %></h1>
+<label for="ingredients"><h2>Description</h2></label>
+  <p><%=  @recipe.description %></p>
+<label for="ingredients"><h2>Ingredients:</h2></label>
+  <p><%=  @recipe.ingredients %></p>
+<label for="instructions"><h2>Instructions:</h2></label>
+  <p><%=  @recipe.instructions %></p>
