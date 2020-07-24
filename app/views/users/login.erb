@@ -2,10 +2,12 @@
 <% if @error %>
   <p><%= @error %></p>
   <% end %>
+<div>
 <form action="/login" method="post">
-<label for="email">Email:</label>
-  <input type="text" name="email">
+  <label for="email">Email:</label>
+    <input type="text" name="email">
   <label for="password">Password:</label>
-  <input type="password" name="password" id="">
-  <input type="submit" value="Login" id="">
+    <input type="password" name="password" id="">
+    <input type="submit" value="Login" id="">
 </form>
+</div>

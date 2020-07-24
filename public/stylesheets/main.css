@@ -13,9 +13,9 @@
 
   /* --- Welcome Page Styles --- */
   body {
-    background-color: rgb(199, 202, 21);
+    background-color: #f38f32;
     color: #333;
-    font-family: Sans-Serif;
+    font-family: Futura;
     line-height: 18px;
   }
 
@@ -33,6 +33,7 @@
   h1 {
     font-size: 36px;
     line-height: 54px;
+    padding-bottom: 20px;
   }
 
   h2 {
@@ -105,11 +106,20 @@
 
   h1 {
     font-size: 24px;
-    line-height: 36px;
+    line-height: 36;
   }
 
   h2 {
     font-size: 18px;
     line-height: 24px;
   }
+}
+
+nav {
+  padding-top: 20px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-evenly;
+    border-top: 1px solid black;
+}
 }
