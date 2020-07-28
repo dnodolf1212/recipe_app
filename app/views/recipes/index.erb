@@ -2,17 +2,17 @@
 <ul>
 <% @recipes.each do |recipe| %> 
   <h2><%= recipe.title %></h2>
-  <label for="description"><h4>Description:</h4></label>
-  <p><%= recipe.description %></p>
-  <label for="ingredients"><h4>Ingredients:</h4></label>
-  <p><%= recipe.ingredients %></p>
-  <label for="instructions"><h4>Instructions:</h4></label>
-  <p><%= recipe.instructions %></p>
+    <label for="description"><h4>Description:</h4></label>
+      <p><%= recipe.description %></p>
+    <label for="ingredients"><h4>Ingredients:</h4></label>
+      <p><%= recipe.ingredients %></p>
+    <label for="instructions"><h4>Instructions:</h4></label>
+      <p><%= recipe.instructions %></p>
   
   <form action="/recipes/<%= recipe.id %>" method="post">
     <input type="hidden" name="_method" value="DELETE">
     <input type="submit" value="Delete">
   </form>
-  <p><a href="/recipes/<%= recipe.id %>/edit">Edit This Recipe</a></p>
+    <p><a href="/recipes/<%= recipe.id %>/edit">Edit This Recipe</a></p>
 <% end %>
 </ul>
