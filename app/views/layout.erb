@@ -21,14 +21,11 @@
       
      <nav>
      <% if current_user %>
-     <p><a href="/recipes/new">Add Your Recipes Here!</a></p>
-     <p><a href="/recipes">Check Out All Your Recipes</a></p>
      <form action="/logout" method="post">
        <input type="hidden" name="_method" value="DELETE">
        <input type="submit" value="logout">
      </form>
      <% else %> 
-      <a href="/login">Login!</a>
       <a href="/signup">SignUp!</a>
      <% end %>
      

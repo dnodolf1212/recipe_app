@@ -5,9 +5,15 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do 
-    user = User.create(params)
-    session[:user_id] = user.id
-    redirect '/recipes'
+      @user = User.new(params)
+      if @user.save
+        session[:user_id] = @user.id
+        redirect '/recipes'
+      else
+        @errors = @user.error.full_messages
+        erb :'users/signup'
+      end
+    
   end
 
   get '/login' do

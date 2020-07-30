@@ -2,7 +2,7 @@ class RecipesController < ApplicationController
   #index
   get '/recipes' do 
     redirect_if_not_logged_in
-    @recipes = current_user.recipes.all
+    @recipes = current_user.recipes
     erb :'recipes/index'
   end
 
@@ -16,7 +16,11 @@ class RecipesController < ApplicationController
   post '/recipes' do
     @recipe = current_user.recipes.build(params)
     @recipe.save
+    if @recipe.save
     redirect "/recipes/#{@recipe.id}"
+    else
+      @errors = @recipe.errors.full_messages
+      erb :'recipes/new'
   end
 
   #show
@@ -31,13 +35,13 @@ class RecipesController < ApplicationController
 
   #edit
   get '/recipes/:id/edit' do 
+    redirect_if_not_logged_in
     set_recipe
     erb :'recipes/edit'
   end
   
   #update
   patch '/recipes/:id' do
-    #binding.pry
     params.delete(:_method)
     set_recipe
     @recipe.update(params)
@@ -46,6 +50,7 @@ class RecipesController < ApplicationController
   
   #delete
   delete '/recipes/:id' do 
+    redirect_if_not_logged_in
     set_recipe
     @recipe.destroy
     redirect '/recipes'
