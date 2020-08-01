@@ -5,15 +5,19 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do 
-      @user = User.new(params)
-      if @user.save
-        session[:user_id] = @user.id
-        redirect '/recipes'
-      else
-        @errors = @user.error.full_messages
+    @user = User.new(params)
+    if @user.user_name.empty? || @user.password.empty?
+        @error = "Username and password cannot be blank"
         erb :'users/signup'
-      end
-    
+    elsif
+        User.find_by(user_name: @user.user_name, email: @user.email)
+        @error = "This account is taken."
+        erb :'users/signup'
+    else
+      @user.save
+      session[:user_id] = @user.id
+      redirect '/recipes'
+    end
   end
 
   get '/login' do
@@ -21,12 +25,12 @@ class UsersController < ApplicationController
   end
 
   post '/login' do 
-    user = User.find_by(email: params[:email])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id 
+    @user = User.find_by(email: params[:email])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id 
       redirect '/recipes'
     else
-      @error = 'invalid info, try again'
+      @error = 'Invalid info, try again'
       erb :'users/login'
     end 
   end

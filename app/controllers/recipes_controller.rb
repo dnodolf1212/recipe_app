@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
   get '/recipes' do 
     redirect_if_not_logged_in
     @recipes = current_user.recipes
-    erb :'recipes/index'
+     erb :'recipes/index'
   end
 
   #new
@@ -14,34 +14,35 @@ class RecipesController < ApplicationController
 
   #create
   post '/recipes' do
+    redirect_if_not_logged_in
     @recipe = current_user.recipes.build(params)
-    @recipe.save
-    if @recipe.save
-    redirect "/recipes/#{@recipe.id}"
+    if !@recipe.title.empty? && !@recipe.description.empty? && !@recipe.ingredients.empty?&& !@recipe.instructions.empty?
+      @recipe.save
+      #binding.pry
+      redirect "/recipes/#{@recipe.id}"
     else
-      @errors = @recipe.errors.full_messages
+      @error = "Please fill out all available fields"
       erb :'recipes/new'
+    end
   end
 
   #show
   get '/recipes/:id' do 
     redirect_if_not_logged_in
-      if set_recipe
-        erb :'recipes/show'
-      else
-       redirect '/recipes'
-      end
+    set_recipe
+    erb :'recipes/show'
   end 
 
   #edit
   get '/recipes/:id/edit' do 
     redirect_if_not_logged_in
-    set_recipe
-    erb :'recipes/edit'
+      set_recipe
+      erb :'recipes/edit'
   end
   
   #update
   patch '/recipes/:id' do
+    redirect_if_not_logged_in
     params.delete(:_method)
     set_recipe
     @recipe.update(params)
@@ -57,6 +58,7 @@ class RecipesController < ApplicationController
   end
 
   private
+
   def set_recipe
     @recipe = current_user.recipes.find(params[:id])
   end
