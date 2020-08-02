@@ -30,7 +30,11 @@ class RecipesController < ApplicationController
   get '/recipes/:id' do 
     redirect_if_not_logged_in
     set_recipe
+    if @recipe 
     erb :'recipes/show'
+    else
+      redirect '/recipes'
+    end
   end 
 
   #edit
@@ -60,7 +64,7 @@ class RecipesController < ApplicationController
   private
 
   def set_recipe
-    @recipe = current_user.recipes.find(params[:id])
+    @recipe = current_user.recipes.find_by(id: params[:id])
   end
 
 end
