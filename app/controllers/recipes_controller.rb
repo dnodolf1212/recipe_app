@@ -39,7 +39,7 @@ class RecipesController < ApplicationController
 
   #edit
   get '/recipes/:id/edit' do 
-    redirect_if_not_logged_in
+    redirect_if_not_logged_in 
       set_recipe
       erb :'recipes/edit'
   end
