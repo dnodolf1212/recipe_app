@@ -1,9 +1,14 @@
 class RecipesController < ApplicationController
+  
+  get "/" do
+    erb :'users/welcome'
+  end
+  
   #index
   get '/recipes' do 
     redirect_if_not_logged_in
     @recipes = current_user.recipes
-     erb :'recipes/index'
+    erb :'recipes/index'
   end
 
   #new
@@ -18,7 +23,6 @@ class RecipesController < ApplicationController
     @recipe = current_user.recipes.build(params)
     if !@recipe.title.empty? && !@recipe.description.empty? && !@recipe.ingredients.empty?&& !@recipe.instructions.empty?
       @recipe.save
-      #binding.pry
       redirect "/recipes/#{@recipe.id}"
     else
       @error = "Please fill out all available fields"
@@ -31,7 +35,7 @@ class RecipesController < ApplicationController
     redirect_if_not_logged_in
     set_recipe
     if @recipe 
-    erb :'recipes/show'
+      erb :'recipes/show'
     else
       redirect '/recipes'
     end
@@ -40,8 +44,8 @@ class RecipesController < ApplicationController
   #edit
   get '/recipes/:id/edit' do 
     redirect_if_not_logged_in 
-      set_recipe
-      erb :'recipes/edit'
+    set_recipe
+    erb :'recipes/edit'
   end
   
   #update
